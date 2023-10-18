@@ -1,0 +1,13 @@
+%{
+%}
+%%
+[6-9][0-9]{9} {printf("\nMobile number valid\n");}
+.+ {printf("\nMobile number invalid");}
+%%
+int yywrap()
+{}
+int main()
+{
+printf("\n Enter the mobile number:");
+yylex();
+}
