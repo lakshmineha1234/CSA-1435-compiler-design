@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *inputFile, *outputFile;
+    char inputFilename[100], outputFilename[100];
+    char ch, prevCh = '\0';
+
+    printf("Enter the name of the input file: ");
+    scanf("%s", inputFilename);
+    printf("Enter the name of the output file: ");
+    scanf("%s", outputFilename);
+
+    inputFile = fopen(inputFilename, "r");
+    outputFile = fopen(outputFilename, "w");
+
+    if (inputFile == NULL || outputFile == NULL) {
+        printf("File not found or could not be opened.\n");
+        return 1;
+    }
+
+    int inComment = 0;
+
+    while ((ch = fgetc(inputFile)) != EOF) {
+        if (ch == '/' && prevCh == '/' && !inComment) {
+            // Ignore single-line comments until the end of the line
+            inComment = 1;
+        } else if (ch == '\n') {
+            inComment = 0;
+            fputc(ch, outputFile); // Keep newlines
+        } else if (!inComment) {
+            if (ch != ' ' && ch != '\t') {
+                fputc(ch, outputFile);
+            } else if (prevCh != ' ' && prevCh != '\t') {
+                fputc(' ', outputFile);
+            }
+        }
+
+        prevCh = ch;
+    }
+
+    fclose(inputFile);
+    fclose(outputFile);
+
+    printf("Comments and redundant spaces removed. Output saved to %s\n", outputFilename);
+
+    return 0;
+}
