@@ -1,22 +1,35 @@
-#include<stdio.h>
-int main()
-{
-	char input[50];
-	int i,n=0,c;
-	printf("enter the text::");
-	gets(input);
-	for(i=0;input[i]!='\0';i++)
-	{
-		if (input[i] == ' ')
-		{
-			n++;
-		}
-		
-		else if(input[i] == '\n')
-		{ 
-			c++;
-		}
-	 
-	}
-	printf("The number of spaces in the text is:%d",n);
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *file;
+    char filename[100];
+    char ch;
+    int spaceCount = 0, newlineCount = 0;
+
+    printf("Enter the name of the text document: ");
+    scanf("%s", filename);
+
+    file = fopen(filename, "r");
+
+    if (file == NULL) {
+        printf("File not found or could not be opened.\n");
+        return 1;
+    }
+
+    while ((ch = fgetc(file)) != EOF) {
+        if (ch == ' ' || ch == '\t') {
+            spaceCount++;
+        }
+        else if (ch == '\n') {
+            newlineCount++;
+        }
+    }
+
+    printf("Number of whitespace characters: %d\n", spaceCount);
+    printf("Number of newline characters: %d\n", newlineCount);
+
+    fclose(file);
+
+    return 0;
 }
