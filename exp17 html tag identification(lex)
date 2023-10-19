@@ -5,7 +5,8 @@ int tags;
 "<"[^>]*>  { tags++; printf("%s \n", yytext); }
 .|\n { }
 %%
-int yywrap(void) {
+int yywrap(void)
+{
 return 1; }
 int main(void)
 {
