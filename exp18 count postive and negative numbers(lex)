@@ -7,7 +7,7 @@ int positive_no = 0, negative_no = 0;
 			printf("negative number = %s\n",yytext);} 
 
 [0-9]+ {positive_no++;
-		printf("positive number = %s\n",yytext);}	
+printf("positive number = %s\n",yytext);}	
 
 %%
 
