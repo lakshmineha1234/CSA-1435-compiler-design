@@ -4,7 +4,8 @@
 int isOperator(char c) {
 	int i;
     char operators[] = "+-*/%=";
-    for ( i = 0; i < strlen(operators); i++) {
+    for ( i = 0; i < strlen(operators); i++)
+{
         if (c == operators[i]) {
             return 1; 
         }
