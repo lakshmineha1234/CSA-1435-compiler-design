@@ -1,0 +1,15 @@
+%{
+#include<stdio.h>
+%}
+
+%%
+
+if|else|while|int|switch|for|char { printf("\n%s is a KEYWORD", yytext);}
+[a-z][A-Z.0-9]+ { printf("\n%s is IDENTIFIER", yytext);}
+
+%%
+int yywrap( ){}
+int main()
+{
+	yylex();
+}
